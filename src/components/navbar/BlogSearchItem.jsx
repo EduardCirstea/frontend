@@ -1,9 +1,8 @@
-import React from "react";
+import React from 'react'
 
 export default function BlogSearchItem({ blog }) {
   return (
-    <div className="search-result">
-      <h2>Articole</h2>
+    <>
       <a href={blog.title} className="divul">
         <img src={blog.image} alt="" />
         <div className="info">
@@ -11,6 +10,6 @@ export default function BlogSearchItem({ blog }) {
           <p>{blog.body}</p>
         </div>
       </a>
-    </div>
-  );
+    </>
+  )
 }

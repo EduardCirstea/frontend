@@ -1,10 +1,12 @@
-@import "../../style/variables.scss";
+@import '../../style/variables.scss';
 
 .search {
   position: relative;
 }
 .search-button {
   position: absolute;
+
+  width: 350px;
   z-index: 101;
   display: flex;
   top: 45px;
@@ -28,7 +30,7 @@
     align-items: center;
   }
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: -10px;
     right: 10px;
@@ -41,6 +43,7 @@
   }
   input {
     // margin: 10px 40px 0px;
+    width: 100% !important;
     border: 1px solid rgba(212, 212, 212, 0.3);
     outline: none;
     padding: 12px;
@@ -55,6 +58,7 @@
     color: #fff;
   }
   .search-result {
+    width: 300px !important;
     padding: 20px 0px;
     h2 {
       font-size: 14px;

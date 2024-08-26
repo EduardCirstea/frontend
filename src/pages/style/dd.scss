@@ -1,58 +1,58 @@
-.cont {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-img {
-  width: 200px;
-}
-// .block {
-//   animation: appear linear;
-//   animation-timeline: view();
-//   animation-range: entry 10% cover 15%;
+// .cont {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   flex-wrap: wrap;
+//   gap: 20px;
 // }
+// img {
+//   width: 200px;
+// }
+// // .block {
+// //   animation: appear linear;
+// //   animation-timeline: view();
+// //   animation-range: entry 10% cover 15%;
+// // }
 
-// @keyframes appear {
-//   from {
+// // @keyframes appear {
+// //   from {
+// //     opacity: 0;
+// //     // transform: translateX(-100px);
+// //     clip-path: inset(100% 100% 100% 100%);
+// //     // scale: 0.5;
+// //   }
+// //   to {
+// //     opacity: 1;
+// //     // transform: translateX(0px);
+// //     clip-path: inset(0 0 0 0);
+// //     // scale: 1;
+// //   }
+// // }
+// .cont {
+//   display: flex;
+//   gap: 20px; /* Space between images */
+// }
+// img {
+//   opacity: 0; /* Start with the image invisible */
+//   transform: translateY(20px); /* Start with a slight downward shift */
+//   transition: opacity 1s ease-in, transform 1s ease-in;
+// }
+// img:nth-child(1) {
+//   animation: fadeInUp 1s ease-in forwards;
+// }
+// img:nth-child(2) {
+//   animation: fadeInUp 1s ease-in 0.5s forwards;
+// }
+// img:nth-child(3) {
+//   animation: fadeInUp 1s ease-in 1s forwards;
+// }
+// @keyframes fadeInUp {
+//   0% {
 //     opacity: 0;
-//     // transform: translateX(-100px);
-//     clip-path: inset(100% 100% 100% 100%);
-//     // scale: 0.5;
+//     transform: translateY(20px);
 //   }
-//   to {
+//   100% {
 //     opacity: 1;
-//     // transform: translateX(0px);
-//     clip-path: inset(0 0 0 0);
-//     // scale: 1;
+//     transform: translateY(0);
 //   }
 // }
-.cont {
-  display: flex;
-  gap: 20px; /* Space between images */
-}
-img {
-  opacity: 0; /* Start with the image invisible */
-  transform: translateY(20px); /* Start with a slight downward shift */
-  transition: opacity 1s ease-in, transform 1s ease-in;
-}
-img:nth-child(1) {
-  animation: fadeInUp 1s ease-in forwards;
-}
-img:nth-child(2) {
-  animation: fadeInUp 1s ease-in 0.5s forwards;
-}
-img:nth-child(3) {
-  animation: fadeInUp 1s ease-in 1s forwards;
-}
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
