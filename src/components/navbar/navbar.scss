@@ -96,7 +96,7 @@
 .nested-li {
   position: absolute;
   top: 7px;
-  left: 276px;
+  left: 220px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -136,7 +136,8 @@
   }
   .nested-li {
     border-top: 1px solid $primary-color !important;
-    top: 27px !important;
+    top: 44px !important;
+    left: 185px;
   }
 }
 @media only screen and (max-width: 840px) {
@@ -153,6 +154,12 @@
   }
   .navbar .containers {
     padding: 0px 10px 0px 30px;
+  }
+  .nested-li {
+    top: 45px !important;
+    left: 140px;
+    border-top: 10px solid red !important;
+    // z-index: 10000;
   }
 }
 

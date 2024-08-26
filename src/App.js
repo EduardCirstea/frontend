@@ -5,6 +5,7 @@ import {
   Register,
   BlogPage,
   NotFoundPage,
+  Settings,
   Articole,
 } from "./pages";
 import { useSelector, useDispatch } from "react-redux";
@@ -32,6 +33,11 @@ function App() {
             exact
             path="/login"
             element={!token ? <Login /> : <Navigate to="/" />}
+          />
+          <Route
+            exact
+            path="/settings"
+            element={!token ? <Login /> : <Settings />}
           />
           <Route
             exact
