@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { FaTrashAlt } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
-import { deleteArticle, updateArticle } from "../../features/articleSlice";
-import { deleteBlog, updateBlog } from "../../features/blogSlice";
+import { deleteArticle } from "../../features/articleSlice";
+import { deleteBlog } from "../../features/blogSlice";
 
 export default function Blog({ b, isBlog }) {
   const dispatch = useDispatch();
@@ -47,10 +47,8 @@ export default function Blog({ b, isBlog }) {
           {b.locatii}
         </Link>
       </div>
-      <p>{b.content.split(".")[0]}</p>
-      <h5>
-        {b.createdAt.substring(0, 10)} / {b.comentarii} Comentarii
-      </h5>
+      <p>{b.content.substring(0, 315)}...</p>
+      <h5>{b.createdAt.substring(0, 10)} </h5>
       {canEditOrDelete && (
         <>
           <button

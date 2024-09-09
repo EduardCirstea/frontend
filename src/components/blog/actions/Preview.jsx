@@ -1,25 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Add from "./Add";
 import { removeFilefromFiles } from "../../../features/blogSlice";
-import { FaPlus } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 
 export default function Preview({ files, activeIndex, setActiveIndex }) {
-  const { user } = useSelector((state) => state.user);
-  const { token } = user;
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const sendMessageHandler = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    const uploaded_files = await uploaded_files(files);
-    const values = {
-      token,
-      files: uploaded_files.length > 0 ? uploaded_files : [],
-    };
-    // let newMsg = await dispatch(sendMessage(values));
-    setLoading(false);
-  };
 
   const handleRemoveFile = (index) => {
     dispatch(removeFilefromFiles(index));
@@ -46,13 +31,14 @@ export default function Preview({ files, activeIndex, setActiveIndex }) {
             className="removeFileIcon hidden"
             onClick={() => handleRemoveFile(i)}
           >
-            <FaPlus
+            <FaTrash
               style={{
                 position: "absolute",
                 right: "0",
-                top: "0",
-                width: "1rem",
-                height: "1rem",
+                top: "5px",
+                width: "20px",
+                height: "15px",
+                cursor: "pointer",
               }}
             />
           </div>

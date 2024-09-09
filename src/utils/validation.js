@@ -33,14 +33,32 @@ export const signInSchema = Yup.object({
 
 export const createPostSchema = Yup.object({
   title: Yup.string()
-    .required("Title is required")
-    .matches(/^[a-zA-Z_ '-]*$/, "No special characters allowed")
-    .min(10, "Name must be between 10 and 64 characters")
-    .max(64, "Name must be between 10 and 64 characters"),
+    .required("Titlul este obligatoriu")
+    .matches(/^[a-zA-Z_ '-]*$/, "Fara caractere speciale")
+    .min(10, "Titlul trebuie sa fie intre 10 si 64 de caractere")
+    .max(64, "Titlul trebuie sa fie intre 10 si 64 de caractere"),
   content: Yup.string()
-    .required("Content is required")
-    .min(340, "Content must be between 340 and 900 characters")
-    .max(900, "Content must be between 340 and 900 characters"),
+    .required("Descrierea este obligatorie")
+    .min(340, "Descrierea trebuie sa fie intre 340 si 900 de caractere")
+    .max(900, "Descrierea trebuie sa fie intre 340 si 900 de caractere"),
+  country: Yup.string().required("Tara este obligatorie"),
+  activity: Yup.string().required("Activitatea este obligatorie"),
+  date: Yup.string().required("Data este obligatorie"),
+  season: Yup.string().required("Anotimpul este obligatorie"),
+  term: Yup.string().required("Durata este obligatorie"),
+  price: Yup.string().required("Pretul este obligatorie"),
+  transport: Yup.string().required("Transportul este obligatorie"),
+});
+export const createArticleSchema = Yup.object({
+  title: Yup.string()
+    .required("Titlul este obligatoriu")
+    .matches(/^[a-zA-Z_ '-]*$/, "Fara caractere speciale")
+    .min(10, "Titlul trebuie sa fie intre 10 si 64 de caractere")
+    .max(64, "Titlul trebuie sa fie intre 10 si 64 de caractere"),
+  content: Yup.string()
+    .required("Descrierea este obligatorie")
+    .min(340, "Descrierea trebuie sa fie intre 340 si 900 de caractere")
+    .max(900, "Descrierea trebuie sa fie intre 340 si 900 de caractere"),
   country: Yup.string().required("Tara este obligatorie"),
   activity: Yup.string().required("Activitatea este obligatorie"),
   date: Yup.string().required("Data este obligatorie"),

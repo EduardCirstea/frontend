@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
-import img from "../../images/fb.png";
 import { addComments, getComments } from "../../features/commentSlice";
 
 export default function Comentarii() {
@@ -11,21 +10,25 @@ export default function Comentarii() {
   const { token } = user;
   const [text, setText] = useState("");
   const params = useParams();
-  const { articleId } = params;
+  const { blogId } = params;
   const count = comments?.length || 0;
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(getComments(articleId));
-  }, []);
+    dispatch(getComments(blogId));
+  }, [dispatch, blogId]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
     const values = {
       token,
       text: text,
-      articleId: articleId,
+      blogId: blogId,
     };
     let res = await dispatch(addComments(values));
+    if (res) {
+      setText(""); // Reset textarea after comment submission
+    }
   };
   return (
     <div className="comentarii">
@@ -38,9 +41,7 @@ export default function Comentarii() {
           <div>
             <div>
               <h3>{c.user.name}</h3>
-              <a href={c._id}>
-                {c.text.substring(0, 10)} la {c.createdAt}
-              </a>
+              <a href={c._id}>la {c.createdAt.substring(0, 10)}</a>
             </div>
             <p>{c.text}</p>
           </div>
@@ -51,10 +52,12 @@ export default function Comentarii() {
         Want to join the discussion? <br /> Feel free to contribute!
       </p>
       <form onSubmit={onSubmit}>
-        <div className="group">
-          <img src={user.picture} alt="" />
-          <h3>{user.name}</h3>
-        </div>
+        {user && (
+          <div className="group">
+            <img src={user.picture} alt="" />
+            <h3>{user.name}</h3>
+          </div>
+        )}
 
         <textarea
           type="text"

@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../components/navbar/Navbar";
 import { Content, Footer } from "../components/home";
-
+import { video } from "./videoInfo";
 export default function Video() {
   const p1 =
     "Ne place sa ne mandrim cu ceea ce facem, de aceea gasim video-urile un excelent mod de a arata acest fapt";
@@ -16,126 +16,19 @@ export default function Video() {
       <Navbar />
       <Content title={title} p1={p1} p2={p2} p3={p3} p4={p4} />
       <div className="row">
-        <div className="cols-2">
-          <iframe
-            src="https://www.youtube.com/embed/wGJAXI_j76E"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>Zbor peste munții Cozia în culorile toamnei.</p>
-        </div>
-        <div className="cols-2">
-          <iframe
-            src="https://www.youtube.com/embed/Jg2l518S9To"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>Traseu de iarnă pe Vf. Leaota (2133m).</p>
-        </div>
-        <div className="cols-2">
-          <iframe
-            src="https://www.youtube.com/embed/Jg2l518S9To"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>Traseu de iarnă pe Vf. Leaota (2133m).</p>
-        </div>
-        <div className="cols-2">
-          <iframe
-            src="https://www.youtube.com/embed/Jg2l518S9To"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>Traseu de iarnă pe Vf. Leaota (2133m).</p>
-        </div>
-        <div className="cols-2">
-          <iframe
-            src="https://www.youtube.com/embed/Jg2l518S9To"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>Traseu de iarnă pe Vf. Leaota (2133m).</p>
-        </div>
-        <div className="cols-2">
-          <iframe
-            src="https://www.youtube.com/embed/Jg2l518S9To"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>Traseu de iarnă pe Vf. Leaota (2133m).</p>
-        </div>
-        <div className="cols-2">
-          <iframe
-            src="https://www.youtube.com/embed/Jg2l518S9To"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>Traseu de iarnă pe Vf. Leaota (2133m).</p>
-        </div>
-        <div className="cols-2">
-          <iframe
-            src="https://www.youtube.com/embed/Jg2l518S9To"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>Traseu de iarnă pe Vf. Leaota (2133m).</p>
-        </div>
-        <div className="cols-2">
-          <iframe
-            src="https://www.youtube.com/embed/Jg2l518S9To"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>Traseu de iarnă pe Vf. Leaota (2133m).</p>
-        </div>
-        <div className="cols-2">
-          <iframe
-            src="https://www.youtube.com/embed/Jg2l518S9To"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>Traseu de iarnă pe Vf. Leaota (2133m).</p>
-        </div>
-        <div className="cols-2">
-          <iframe
-            src="https://www.youtube.com/embed/Jg2l518S9To"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>Traseu de iarnă pe Vf. Leaota (2133m).</p>
-        </div>
-        <div className="cols-2">
-          <iframe
-            src="https://www.youtube.com/embed/Jg2l518S9To"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
-          <p>Traseu de iarnă pe Vf. Leaota (2133m).</p>
-        </div>
+        {video.map((v) => (
+          <div className="cols-2">
+            <iframe
+              src={v.url}
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+            <p>{v.title}</p>
+          </div>
+        ))}
       </div>
       <Footer />
     </div>

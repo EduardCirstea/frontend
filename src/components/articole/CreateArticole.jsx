@@ -2,12 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import "./style/article.scss";
 import { useRef, useState } from "react";
 import { uploadFiles } from "../../utils/upload";
-import { clearFiles, createArticle } from "../../features/articleSlice";
+import {
+  clearFiles,
+  createArticle,
+  getArticles,
+} from "../../features/articleSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { createPostSchema } from "../../utils/validation";
-import { GoogleMap, useLoadScript, Autocomplete } from "@react-google-maps/api";
-
+import { createArticleSchema } from "../../utils/validation";
+import { useLoadScript, Autocomplete } from "@react-google-maps/api";
 import PhotoAtt from "./actions/PhotoAtt";
 import Preview from "./actions/Preview";
 import Viewer from "./actions/Viewer";
@@ -17,13 +20,13 @@ export default function CreateArticole({ setShowArticleButton }) {
   const { files } = useSelector((state) => state.article);
   const { user } = useSelector((state) => state.user);
   const { token } = user;
-  const [location, setLocation] = useState({ lat: 44.4268, lng: 26.1025 }); // State to store lat and lng
+  const [location, setLocation] = useState({ lat: 44.4268, lng: 26.1025 });
   const autocompleteRef = useRef(null);
   const [loading, setLoading] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [place, setPlace] = useState(null);
   const dispatch = useDispatch();
-  const { isLoaded, loadError } = useLoadScript({
+  const { isLoaded } = useLoadScript({
     googleMapsApiKey: "AIzaSyALQWuohFpxC6fPVUjxOmqIHzxmh5FCKpc",
     libraries,
   });
@@ -33,17 +36,16 @@ export default function CreateArticole({ setShowArticleButton }) {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(createPostSchema),
+    resolver: yupResolver(createArticleSchema),
   });
+  console.log(errors);
   const onPlaceChanged = () => {
     const place = autocompleteRef.current.getPlace();
     if (place.geometry) {
       const lat = place.geometry.location.lat();
       const lng = place.geometry.location.lng();
-
-      setLocation({ lat, lng }); // Save lat and lng in the location state
+      setLocation({ lat, lng });
       setPlace(place);
-      console.log(location);
     }
   };
 
@@ -51,7 +53,6 @@ export default function CreateArticole({ setShowArticleButton }) {
     setLoading(true);
     const uploaded_files = await uploadFiles(files);
     let filesRes = uploaded_files.length > 0 ? uploaded_files : [];
-    console.log(place.name);
     await dispatch(
       createArticle({
         ...values,
@@ -62,6 +63,7 @@ export default function CreateArticole({ setShowArticleButton }) {
         location: place.name,
       })
     );
+    await dispatch(getArticles());
     setLoading(false);
     setShowArticleButton(false);
   };
@@ -72,6 +74,7 @@ export default function CreateArticole({ setShowArticleButton }) {
   };
 
   if (!isLoaded) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="blur">
@@ -114,7 +117,7 @@ export default function CreateArticole({ setShowArticleButton }) {
 
           <label htmlFor="season">Anotimp </label>
           <select name="season" {...register("season")}>
-            <option value="Romania">Selecteaza anotimp</option>
+            <option value="">Selecteaza anotimp</option>
             <option value="Primavara">Primavara</option>
             <option value="Vara">Vara</option>
             <option value="Toamna">Toamna</option>
@@ -143,7 +146,7 @@ export default function CreateArticole({ setShowArticleButton }) {
           </div>
           <label htmlFor="activity">Activitate </label>
           <select name="activity" {...register("activity")}>
-            <option value="relaxare">Selecteaza o activitate</option>
+            <option value="">Selecteaza o activitate</option>
             <option value="relaxare">relaxare</option>
             <option value="drumetie">drumetie</option>
             <option value="cultural">cultural</option>
@@ -155,10 +158,10 @@ export default function CreateArticole({ setShowArticleButton }) {
               {errors?.activity?.message}
             </p>
           )}
-          {/* <div className="form-group"> */}
+
           <label htmlFor="country">Tara</label>
           <select name="country" {...register("country")}>
-            <option value="Romania">Selecteaza o tara</option>
+            <option value="">Selecteaza o tara</option>
             <option value="Argentina">Argentina</option>
             <option value="Australia">Australia</option>
             <option value="Bangladesh">Bangladesh</option>
@@ -214,14 +217,6 @@ export default function CreateArticole({ setShowArticleButton }) {
               placeholder="Descrie vacanta..."
               {...register("content")}
             ></textarea>
-            <div
-              style={{
-                position: "absolute",
-                top: "100px",
-                right: "10px",
-                fontSize: "12px",
-              }}
-            ></div>
             {errors?.content?.message && (
               <p style={{ color: "red", fontSize: "14px", paddingLeft: "4px" }}>
                 {errors?.content?.message}
@@ -240,20 +235,6 @@ export default function CreateArticole({ setShowArticleButton }) {
             />
           )}
           {files && <Viewer activeIndex={activeIndex} />}
-          {/* <div
-            onClick={(e) => sendMessageHandler(e)}
-            className="bg-green_1 w-16 h-16 mt-2 rounded-full flex items-center justify-center cursor-pointer"
-          >
-            {loading ? (
-              <p color="#E9EDEF" size={25}>
-                Loading..
-              </p>
-            ) : (
-              <p color="#E9EDEF" size={25}>
-                Send
-              </p>
-            )}
-          </div> */}
           <button className="btn-register" type="submit">
             Creaza Articol
           </button>

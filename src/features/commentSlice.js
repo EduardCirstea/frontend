@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const BLOG_ENDPOINT = `${process.env.REACT_APP_API_ENDPOINT}/blog/`;
-const ARTICLE_ENDPOINT = `${process.env.REACT_APP_API_ENDPOINT}/article/`;
 
 const initialState = {
   status: "",
@@ -12,11 +11,9 @@ const initialState = {
 
 export const getComments = createAsyncThunk(
   "comments/get-all",
-  async (articleId, { rejectWithValue }) => {
+  async (blogId, { rejectWithValue }) => {
     try {
-      const response = await axios.get(
-        ARTICLE_ENDPOINT + `${articleId}/comments`
-      );
+      const response = await axios.get(BLOG_ENDPOINT + `${blogId}/comments`);
       return response.data;
     } catch (error) {
       rejectWithValue(error.response.data.error.message);
@@ -30,9 +27,9 @@ export const addComments = createAsyncThunk(
   "comments/add-comments",
   async (values, { rejectWithValue }) => {
     try {
-      const { token, text, articleId } = values;
+      const { token, text, blogId } = values;
       const response = await axios.post(
-        ARTICLE_ENDPOINT + `${articleId}/comments`,
+        BLOG_ENDPOINT + `${blogId}/comments`,
         {
           text,
         },

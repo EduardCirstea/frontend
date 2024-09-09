@@ -11,11 +11,11 @@ export default function Settings() {
       <div className="settings">
         <SideBar setIndex={setIndex} />
         {index === "1" ? (
-          <div>Content for index 1</div>
+          <div>Setarile profilului</div>
         ) : index === "2" ? (
-          <div>Content for index 2</div>
+          <div>Pagina de reporturi</div>
         ) : index === "3" ? (
-          <div>Content for index 3</div>
+          <div>Pagina pentru a vizualiza blogurile inainte de a fi postate</div>
         ) : (
           <div>Default content</div>
         )}

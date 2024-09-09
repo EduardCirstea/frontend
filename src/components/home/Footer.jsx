@@ -10,10 +10,7 @@ export default function Footer() {
   const locations = newArr.map((l) => l.location);
   const seasons = newArr.map((l) => l.season);
   const activities = newArr.map((l) => l.activity);
-  // const locationCount = locations.reduce((acc, loc) => {
-  //   acc[loc] = (acc[loc] || 0) + 1;
-  //   return acc;
-  // }, {});
+
   const allFields = [...locations, ...seasons, ...activities];
 
   const fieldCount = allFields.reduce((acc, field) => {
@@ -60,8 +57,8 @@ export default function Footer() {
           </div>
           <div className="despre">
             <h3>Despre</h3>
-            <h4>Madalina</h4>
-            <h4>063 231 231</h4>
+            <h4>Vinereanu Andreea</h4>
+            <h4>076 3231 231</h4>
             <p>
               Fotograf independent, evenimente, nuntă, ședinte foto.
               <br /> Călătorii, drumeții în natură, hiking, mountain bike,
@@ -85,8 +82,6 @@ export default function Footer() {
             </ul>
           </div>
         </div>
-        {/* </div>
-        </div> */}
       </div>
       <div className="copyright">
         <p>&copy; 2024 Pe Drumuri Straine. Toate drepturile rezervate.</p>

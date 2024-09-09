@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const BLOG_ENDPOINT = `${process.env.REACT_APP_API_ENDPOINT}/blog/`;
 const ARTICLE_ENDPOINT = `${process.env.REACT_APP_API_ENDPOINT}/article/`;
 
 const initialState = {

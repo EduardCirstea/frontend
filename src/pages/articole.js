@@ -16,7 +16,6 @@ export default function Article() {
   const { articles } = useSelector((state) => state.article);
   const { blogs } = useSelector((state) => state.blog);
   const dispatch = useDispatch();
-  console.log(articles);
   const [showArticleButton, setShowArticleButton] = useState(false);
   useEffect(() => {
     dispatch(getArticles());
@@ -52,7 +51,7 @@ export default function Article() {
               <CreateArticole setShowArticleButton={setShowArticleButton} />
             )}
             {articles.map((post, i) =>
-              !post.reported && post.reviewed ? (
+              !post.reported && !post.reviewed ? (
                 <ArticoleCard post={post} key={i} />
               ) : null
             )}
@@ -63,7 +62,7 @@ export default function Article() {
               <ul>
                 {sortedLocations.map(({ name, count }) => (
                   <li key={name}>
-                    <a href="#">
+                    <a>
                       {name} {count > 1 && `(${count})`}
                     </a>
                   </li>

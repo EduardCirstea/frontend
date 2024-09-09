@@ -14,13 +14,12 @@ const cloud_secret = process.env.REACT_APP_CLOUD_SECRET;
 export default function LoginForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { status, error } = useSelector((state) => state.user);
+  const { error } = useSelector((state) => state.user);
   const [picture, setPicture] = useState();
   const [readablePicture, setReadablePicture] = useState("");
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(signUpSchema),
@@ -82,14 +81,7 @@ export default function LoginForm() {
             register={register}
             error={errors?.email?.message}
           />
-          <AuthInput
-            name="status"
-            type="text"
-            placeholder="Status (Optional)"
-            label="Status"
-            register={register}
-            error={errors?.status?.message}
-          />
+
           <AuthInput
             name="password"
             type="password"

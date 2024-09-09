@@ -59,7 +59,7 @@ export default function Navbar() {
             </ul>
 
             <li>
-              <Link to="videos">Videos</Link>
+              <Link to="/videos">Videos</Link>
             </li>
             {token ? (
               <li>

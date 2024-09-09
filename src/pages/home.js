@@ -3,7 +3,6 @@ import "./style/home.scss";
 import Navbar from "../components/navbar/Navbar";
 import { HeroBanner, Content, Blogs, Footer, Videos } from "../components/home";
 import Facebook from "../components/home/Facebook";
-import Instagram from "../components/articole/Instagram";
 
 export default function Home() {
   const title = `Pe drumuri Straine - Cele mai frumoase peisaje din Europa, trasee
@@ -19,9 +18,8 @@ export default function Home() {
       <Content title={title} p4={p4} p1={p1} p2={p2} p3={p3} />
       <Blogs />
       <Videos />
-      <Facebook />
       <div className="containers" style={{ margin: "20px 0px" }}>
-        <Instagram />
+        <Facebook />
       </div>
       <Footer />
     </div>

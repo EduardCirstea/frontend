@@ -4,12 +4,10 @@ import { useParams } from "react-router-dom";
 import Navbar from "../navbar/Navbar.jsx";
 import Footer from "../home/Footer.jsx";
 import "./style/article.scss";
-import { getComments } from "../../features/commentSlice.js";
 import { getReviews } from "../../features/reviewSlice.js";
 import FeedbackStars from "./FeedbackStars.jsx";
 import { getArticle } from "../../features/articleSlice.js";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-import Comentarii from "./Comentarii.jsx";
 import Facebook from "../home/Facebook.jsx";
 import Instagram from "./Instagram.jsx";
 import Recomandari from "./Recomandari.jsx";
@@ -21,7 +19,6 @@ export default function ArticoleItem() {
   const params = useParams();
   const { articleId } = params;
   const { article } = useSelector((state) => state.article);
-  const { comments } = useSelector((state) => state.comment);
   const { reviews } = useSelector((state) => state.review);
 
   const [center, setCenter] = useState({ lat: 0, lng: 0 });
@@ -96,7 +93,7 @@ export default function ArticoleItem() {
               key={i}
               style={{ width: "200px" }}
               src={f.file.secure_url}
-              alt={`Gallery image ${f.id}`}
+              alt="#"
               onClick={() => openLightbox(f.file.secure_url)}
             />
           ))}
