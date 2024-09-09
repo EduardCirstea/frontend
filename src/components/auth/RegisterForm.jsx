@@ -61,7 +61,6 @@ export default function LoginForm() {
       <div className="login-container">
         <div className="header-form">
           <h2>Welcome Back!</h2>
-          <p>Continue with Google or enter your details.</p>
         </div>
         {/* <button className="btn-login btn-google" type="submit">
           <FaGoogle /> Login with Google

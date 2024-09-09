@@ -7,7 +7,6 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: "Montserrat", Arial, Helvetica, sans-serif;
   font-family: "Open Sans", Arial, Helvetica, sans-serif;
 }
 
@@ -42,11 +41,15 @@ h3,
 h4,
 h6,
 h6 {
+  font-weight: 600;
   font-family: "Montserrat", Arial, Helvetica, sans-serif;
+  color: #222;
 }
 
 p {
-  font-family: "open sans", Helvetica, Arial, sans-serif;
+  font-family: "open sans", sans-serif;
+  line-height: 1.65em;
+  color: #544f54;
 }
 a img {
   position: relative;

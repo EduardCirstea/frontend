@@ -99,6 +99,9 @@
     margin-top: 10px;
     line-height: 1.3rem;
     font-weight: 300;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
   }
   .citeste {
     margin-top: 10px;

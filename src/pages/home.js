@@ -1,26 +1,17 @@
 import React from "react";
 import "./style/home.scss";
-import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/navbar/Navbar";
 import { HeroBanner, Content, Blogs, Footer, Videos } from "../components/home";
+import Facebook from "../components/home/Facebook";
+import Instagram from "../components/articole/Instagram";
 
 export default function Home() {
-  const { user } = useSelector((state) => state.user);
-
-  const title = `Hoinărind prin România Cele mai frumoase peisaje din România, trasee
-            și călătorii în locuri sălbatice, filmări cu drona`;
-  const p1 = `Aici găsiți câteva dintre cele mai interesante trasee montane,
-            recomandări de trasee turistice, cele mai frumoase peisaje din
-            România și detalii din diverse locuri vizitate de noi in România.`;
-  const p2 = ` Cei care nu ați ajuns incă poate veți fi tentați să ajungeți in
-            aceste locuri sau vă puteți folosi ideile de trasee montane din
-            România. <br />
-            Dacă vreți, vă aștept să veniți alături de mine și de alți iubitori
-            de natură și călătorii sau dacă pot să vă ajut in alte proiecte
-            puteți să imi scrieți .`;
-  const p3 = `Astept mesajele voastre și nu uitați pentru noutăți: Like/ Follow pe
-            pagina facebook , instagram sau YouTube.`;
-  const p4 = `Blog de fotografie și călătorii Hoinărind prin România.`;
+  const title = `Pe drumuri Straine - Cele mai frumoase peisaje din Europa, trasee
+            și călătorii în locuri sălbatice, filmări cu drona si poze spectaculoase`;
+  const p1 = `Aici găsiți o colecție de articole captivante despre cele mai interesante destinații de vacanță din întreaga lume, recomandări de itinerarii, sfaturi utile pentru călătorii, și detalii din diverse locuri pe care le-am vizitat.`;
+  const p2 = `Dacă încă nu ați avut ocazia să explorați aceste locuri minunate, poate veți fi inspirați să le adăugați pe lista voastră de călătorii viitoare. Fie că sunteți în căutare de idei pentru vacanțe exotice, city break-uri, sau aventuri inedite, aici veți găsi sugestii și inspirație. Dacă doriți să vă alăturați comunității noastre de iubitori de călătorii sau aveți nevoie de ajutor în planificarea unei vacanțe.`;
+  const p3 = `Dorim ca articolele cat si povestile utilizatorilor site-ului sa va fie de folos.`;
+  const p4 = `Bloguri si articole despre vacante, calatorii si sfaturi pentru calatorii`;
   return (
     <div>
       <Navbar />
@@ -28,6 +19,10 @@ export default function Home() {
       <Content title={title} p4={p4} p1={p1} p2={p2} p3={p3} />
       <Blogs />
       <Videos />
+      <Facebook />
+      <div className="containers" style={{ margin: "20px 0px" }}>
+        <Instagram />
+      </div>
       <Footer />
     </div>
   );

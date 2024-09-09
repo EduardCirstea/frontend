@@ -1,53 +1,89 @@
-import { useSelector } from 'react-redux'
-import { Blogs, Content, Footer } from '../components/home'
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import "./style/blog.scss";
+import Navbar from "../components/navbar/Navbar.jsx";
+import Footer from "../components/home/Footer.jsx";
+import ArticoleCard from "../components/articole/ArticoleCard.jsx";
+import { getArticles } from "../features/articleSlice.js";
+import CreateArticleButton from "../components/articole/CreateArticleButton.jsx";
+import CreateArticole from "../components/articole/CreateArticole.jsx";
+import { Link } from "react-router-dom";
+import { getBlogs } from "../features/blogSlice.js";
 
-import Navbar from '../components/navbar/Navbar'
-import './style/articole.scss'
-import { blog } from '../blog.js'
-import Blog from '../components/home/Blog'
-import CreateBlogButton from '../components/blog/CreateBlogButton.jsx'
-import { useState } from 'react'
-import CreateBlog from '../components/blog/CreateBlog.jsx'
-
-export default function Articole() {
-  const { user } = useSelector((state) => state.user)
-  const { token } = user
-  const [showCreateBlog, setShowCreateBlog] = useState(false)
-  console.log(showCreateBlog)
-  const title =
-    'Cele mai frumoase călătorii prin România, trasee pe munte, peisaje si locuri de vizitat.'
-  const p1 = `Sunt fotograf profesionist la evenimente de mulți ani, dar in timpul liber mă relaxez prin călătorii in natură si trasee pe munte in România, hiking, trekking, cătărare ușoară.`
-  const p2 = `Vă prezint trasee montane și călătorii cu multe fotografii superbe, peisaje din topul celor mai frumoase locuri de vizitat din Romania.`
-  const p3 = `Mai nou am adăugat și filmari aeriene cu drona, zbor peste vârfuri din munții României, zbor peste trasee turistice senzationale si multe altele. Am adăugat in articole si harțile zonei sau track-uri GPS disponibile pentru cine vrea sa le descarce.`
+export default function Article() {
+  const { user } = useSelector((state) => state.user);
+  const { token } = user;
+  const { articles } = useSelector((state) => state.article);
+  const { blogs } = useSelector((state) => state.blog);
+  const dispatch = useDispatch();
+  console.log(articles);
+  const [showArticleButton, setShowArticleButton] = useState(false);
+  useEffect(() => {
+    dispatch(getArticles());
+    dispatch(getBlogs());
+  }, []);
+  let newArr = [...articles, ...blogs];
+  const locations = newArr.map((l) => l.location);
+  const locationCount = locations.reduce((acc, loc) => {
+    acc[loc] = (acc[loc] || 0) + 1;
+    return acc;
+  }, {});
+  const sortedLocations = Object.entries(locationCount)
+    .map(([name, count]) => ({ name, count }))
+    .sort((a, b) => a.name.localeCompare(b.name));
+  if (!articles) {
+    return <h1>Loading ....</h1>;
+  }
   return (
-    <div className="articole ">
+    <>
       <Navbar />
-      <div className="containers blog-home">
-        <Content title={title} p1={p1} p2={p2} p3={p3} />
-        <hr
-          style={{
-            background: '#ccc',
-            height: '.5px',
-            border: 'none',
-
-            width: '100%',
-            margin: '40px 0px',
-          }}
-        />
-        {token ? (
-          <CreateBlogButton setShowCreateBlog={setShowCreateBlog} />
-        ) : null}
-        {showCreateBlog && <CreateBlog setShowCreateBlog={setShowCreateBlog} />}
-        <div className="text">
-          <h2>Trasee si calatorii prin romania</h2>
-        </div>
-        <div className="row">
-          {blog.map((b, i) => (
-            <Blog b={b} key={i} />
-          ))}
+      <div className="blog">
+        <div className="containers">
+          <div className="left" style={{ position: "relative" }}>
+            <div>
+              <h1>Articole</h1>
+            </div>
+            {token ? (
+              <CreateArticleButton
+                setShowArticleButton={setShowArticleButton}
+              />
+            ) : null}
+            {showArticleButton && (
+              <CreateArticole setShowArticleButton={setShowArticleButton} />
+            )}
+            {articles.map((post, i) =>
+              !post.reported && post.reviewed ? (
+                <ArticoleCard post={post} key={i} />
+              ) : null
+            )}
+          </div>
+          <div className="right">
+            <div className="destinatii1">
+              <h3>Destinatii</h3>
+              <ul>
+                {sortedLocations.map(({ name, count }) => (
+                  <li key={name}>
+                    <a href="#">
+                      {name} {count > 1 && `(${count})`}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="destinatii2 ">
+              <h3>Blogs</h3>
+              <ul>
+                {blogs?.map((blog) => (
+                  <li key={blog._id}>
+                    <Link to={`/blog/${blog._id}`}>{blog.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
       <Footer />
-    </div>
-  )
+    </>
+  );
 }

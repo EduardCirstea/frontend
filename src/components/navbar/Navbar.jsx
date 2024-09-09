@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
 import { IoMdSearch } from "react-icons/io";
 import { IoMenuOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import SearchButton from "./SearchButton";
 import "./navbar.scss";
+import logo from "../../images/logo.png";
+import { logout } from "../../features/userSlice";
 
 export default function Navbar() {
   const { user } = useSelector((state) => state.user);
   const { token } = user;
+  const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
   const [search, setSearch] = useState(false);
   const [navbar, setNavbar] = useState(false);
@@ -18,7 +21,7 @@ export default function Navbar() {
       <div className="containers">
         <div className="logo">
           <Link to="/">
-            <h2>Logo</h2>
+            <img src={logo} alt="" />{" "}
           </Link>
         </div>
         <nav className="navbar-list">
@@ -30,13 +33,13 @@ export default function Navbar() {
               <Link to="/blog">Blog</Link>
             </li>
             <li>
-              <Link to="/articole">Articole</Link>
+              <Link to="/article">Articole</Link>
             </li>
             <li
               onMouseEnter={() => setHover(true)}
               onMouseLeave={() => setHover(false)}
             >
-              <Link to="#">Foto Diverse</Link>
+              <Link to="#">Diverse poze</Link>
             </li>
 
             <ul
@@ -45,18 +48,18 @@ export default function Navbar() {
               onMouseLeave={() => setHover(false)}
             >
               <li>
-                <Link to="#">Foto Evenimente</Link>
+                <Link to="/evenimente">Foto Evenimente</Link>
               </li>
               <li>
-                <Link to="#">Peisaje Natura</Link>
+                <Link to="/peisaje">Peisaje Natura</Link>
               </li>
               <li>
-                <Link to="#">Flori Salbatice</Link>
+                <Link to="/flori">Flori Salbatice</Link>
               </li>
             </ul>
 
             <li>
-              <Link to="#">Europa</Link>
+              <Link to="videos">Videos</Link>
             </li>
             {token ? (
               <li>
@@ -68,8 +71,8 @@ export default function Navbar() {
                 <Link to="/login">Login</Link>
               </li>
             ) : (
-              <li>
-                <Link to="/login">logout</Link>
+              <li onClick={() => dispatch(logout())}>
+                <Link>logout</Link>
               </li>
             )}
 

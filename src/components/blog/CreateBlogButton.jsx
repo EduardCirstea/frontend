@@ -6,7 +6,7 @@ export default function CreateBlogButton({ setShowCreateBlog }) {
       className="blog-btn"
       onClick={() => setShowCreateBlog((prev) => !prev)}
     >
-      Create blog
+      Create Blog Post
     </button>
   );
 }

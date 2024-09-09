@@ -6,7 +6,11 @@ export default function Content({ title, p4, p1, p2, p3 }) {
       <div className="row">
         <div className="col-1">
           <h2>{title}</h2>
-          {p4 && <p>Blog de fotografie și călătorii Hoinărind prin România.</p>}
+          {p4 ? (
+            <p>{p4}</p>
+          ) : (
+            <p>Blog de fotografie și călătorii Hoinărind prin România.</p>
+          )}
         </div>
 
         <div className="col-2">

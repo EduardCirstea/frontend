@@ -3,10 +3,10 @@ import React from "react";
 export default function Videos() {
   return (
     <>
-      <div className="center-text">
+      <div className="center-text" style={{ marginBottom: "20px" }}>
         <h2>Video-uri drone</h2>
       </div>
-      <div className="row" style={{ marginBottom: "100px" }}>
+      <div className="row" style={{ marginBottom: "50px" }}>
         <div className="cols-2">
           <iframe
             src="https://www.youtube.com/embed/wGJAXI_j76E"

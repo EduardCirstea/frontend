@@ -1,150 +1,65 @@
-import React from "react";
-import { blog } from "../blog.js";
-import "./style/blog.scss";
-import Navbar from "../components/navbar/Navbar.jsx";
-import Footer from "../components/home/Footer.jsx";
+import { useDispatch, useSelector } from "react-redux";
+import { Blogs, Content, Footer } from "../components/home";
 
-export default function BlogPage() {
+import Navbar from "../components/navbar/Navbar";
+import "./style/articole.scss";
+import Blog from "../components/home/Blog";
+import CreateBlogButton from "../components/blog/CreateBlogButton.jsx";
+import { useEffect, useState } from "react";
+import CreateBlog from "../components/blog/CreateBlog.jsx";
+import { getBlogs } from "../features/blogSlice.js";
+
+export default function Articole() {
+  const { user } = useSelector((state) => state.user);
+  const { blogs } = useSelector((state) => state.blog);
+  const { token } = user;
+  const dispatch = useDispatch();
+  const [showCreateBlog, setShowCreateBlog] = useState(false);
+
+  useEffect(() => {
+    if (!blogs.length) {
+      dispatch(getBlogs()); // Trigger the action to fetch blogs
+    }
+  }, []);
+
+  const isBlog = "blog";
+  const title =
+    "Cele mai frumoase călătorii prin România, trasee pe munte, peisaje si locuri de vizitat.";
+  const p1 = `Sunt fotograf profesionist la evenimente de mulți ani, dar in timpul liber mă relaxez prin călătorii in natură si trasee pe munte in România, hiking, trekking, cătărare ușoară.`;
+  const p2 = `Vă prezint trasee montane și călătorii cu multe fotografii superbe, peisaje din topul celor mai frumoase locuri de vizitat din Romania.`;
+  const p3 = `Mai nou am adăugat și filmari aeriene cu drona, zbor peste vârfuri din munții României, zbor peste trasee turistice senzationale si multe altele. Am adăugat in articole si harțile zonei sau track-uri GPS disponibile pentru cine vrea sa le descarce.`;
+  const p = "";
+  if (!blogs) {
+    return <div>Loading...</div>;
+  }
   return (
-    <>
+    <div className="articole ">
       <Navbar />
-      <div className="blog">
-        <div className="containers">
-          <div className="left">
-            <div>
-              <h1>Blog</h1>
-            </div>
-            {blog.map((post) => (
-              <div key={post.id} className="blog-page">
-                <h2>{post.title}</h2>
-                <h3>{post.locatie} Grecia</h3>
-                <a href="#">
-                  <img src={post.image} alt={post.title} />
-                </a>
-                <p>{post.body}</p>
-                <a href={post.url} className="citeste">
-                  Citeste mai mult{" "}
-                </a>
-              </div>
-            ))}
-          </div>
-          <div className="right">
-            <div className="destinatii1">
-              <h3>Destinatii</h3>
-              <ul>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-                <li>
-                  <a href="#">Alergare</a>
-                </li>
-              </ul>
-            </div>
-            <div className="destinatii2 ">
-              <h3>Articole</h3>
-              <ul>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-                <li>
-                  <a href="#">Munții Iezer Păpușa creasta completă</a>
-                </li>
-              </ul>
-            </div>
-          </div>
+      <div className="containers blog-home">
+        <Content title={title} p1={p1} p2={p2} p3={p3} p4={p} />
+        <hr
+          style={{
+            background: "#ccc",
+            height: ".5px",
+            border: "none",
+            width: "100%",
+            margin: "40px 0px",
+          }}
+        />
+        {token ? (
+          <CreateBlogButton setShowCreateBlog={setShowCreateBlog} />
+        ) : null}
+        {showCreateBlog && <CreateBlog setShowCreateBlog={setShowCreateBlog} />}
+        <div className="text">
+          <h2>Trasee si calatorii prin romania</h2>
+        </div>
+        <div className="row">
+          {[...blogs].reverse().map((b, i) => (
+            <Blog b={b} isBlog={isBlog} key={b._id} />
+          ))}
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 }

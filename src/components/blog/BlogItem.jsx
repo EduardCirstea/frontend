@@ -1,44 +1,63 @@
-import React from "react";
-import { blog } from "../../blog.js";
-import "./style/blog.scss";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Navbar from "../navbar/Navbar.jsx";
+import "./style/blog.scss";
+import { getBlog } from "../../features/blogSlice.js";
+import { getComments } from "../../features/commentSlice.js";
+import { getReviews } from "../../features/reviewSlice.js";
+import FeedbackStars from "./FeedbackStars.jsx";
+
 export default function BlogItem() {
-  const blog1 = blog[0];
+  const dispatch = useDispatch();
+  const params = useParams();
+  const { blogId } = params;
+  const { blog } = useSelector((state) => state.blog);
+  const { comments } = useSelector((state) => state.comment);
+  const { reviews } = useSelector((state) => state.review);
+
+  useEffect(() => {
+    dispatch(getBlog(blogId));
+    dispatch(getComments(blogId));
+    dispatch(getReviews(blogId));
+    // dispatch(getNotes(ticketId));
+  }, [blogId, dispatch]);
+
+  if (!blog) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div>
       <Navbar />
       <div className="containers">
         <div className="blog-item">
           <div className="left">
-            <h1>{blog1.title}</h1>
-            <p>{blog1.body}</p>
-            <p>
-              Traseu de o zi in Munții Iezer Păpușa, dificil prin lungimea de 35
-              km si ascensiune total 2,576 m, timpul nostru 12 ore si 16 min, cu
-              mers rapid si pauze foarte scurte, vreme capricioasă dar frumoasă.
-            </p>
-            <p>
-              Parcare la Cabana Voina, bandă roșie: urcare la stâna Văcarea –
-              Vf. Huluba – Vf. Văcarea (2068m) – Vf. Târâțoasa – Vf. Cățunu –
-              Capul Cățunului – Vf. Iezerul Mare (2463m) – Vf. Roșu (2469m) -Vf.
-              Pișcanu – Vf. Bătrâna (2341m) – Vf. Păpușa (2393m) – Refugiul/ Vf.
-              Găinațul Mare – Cabana Voina.
-            </p>
-            <p>
-              Lungime: 35 km. Diferenţă de nivel: 2,576 m. Timp total parcurs de
-              noi: 12 ore si 16 min
-            </p>
-            <p>Izvoare pe traseu la Refugiul Iezer și lângă Vf. Bătrâna</p>
-            <p>
-              1 iunie 2023 Aștept comentarii sau mesaje. Mulțumesc pentru
-              like/Follow la pagina mea de facebook sau instagram. Email Iustin
-              Ichim
-            </p>
+            <h1>{blog.title}</h1>
+            <p>{blog.content}</p>
           </div>
           <div className="right">
-            <img src={blog1.image} alt="" />
+            <img
+              src={
+                blog.files && blog.files.length > 0
+                  ? blog.files[0].file.url
+                  : ""
+              }
+              alt="Blog"
+            />
           </div>
         </div>
+        <div className="photo-gallery">
+          {blog?.files?.map((f, i) => (
+            <img
+              key={i}
+              style={{ width: "200px" }}
+              src={f.file.secure_url}
+              alt={`Gallery image ${f.id}`}
+            />
+          ))}
+        </div>
+        <FeedbackStars />
       </div>
     </div>
   );
